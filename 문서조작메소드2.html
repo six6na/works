@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>문서조작메소드2</title>
+    <script src="../0607/jquery-3.6.0.min.js"></script>
+    <style>
+        article {
+            border: 1px solid #ccc;
+            padding: 1em;
+        }
+        
+        #gallery {
+            width: 100%;
+            background: #efefef;
+            overflow: hidden;
+        }
+
+        #gallery img {
+            width: calc(100% / 3);
+            display: block;
+            float: left;
+        }
+    </style>
+</head>
+<body>
+   <article>
+       <p>1</p>
+       <p>2</p>
+   </article> 
+   <button class="appendBtn">append(뒤에 추가)</button>
+   <button class="prependBtn">prepend(앞에 추가)</button>
+   <script>
+       $(function(){
+           $('.appendBtn').click(function(){
+               $('article').append('<p>뒤에 추가</p>');
+           });
+
+           $('.prependBtn').click(function(){
+               $('article').prepend('<p>앞에 추가</p>');
+           });
+       });
+   </script>
+
+   <h2>랜덤 이미지 갤러리</h2>
+   <section id="gallery">
+    <img src="https://placeimg.com/200/200/nature/1" alt="">
+   </section>
+   <button class="addImageBtn">이미지 추가</button>
+   <script>
+       var imgNumber = 2; //전역변수
+
+       function addImage() {
+           $('#gallery').append(`<img src="https://placeimg.com/200/200/nature/${imgNumber}" alt="">`);
+           imgNumber = imgNumber + 1; // 이미지 번호 바꿈
+       }
+
+       $(function(){
+           $('.addImageBtn').click(function(){
+             addImage(); // 이미지 추가 함수 호출
+           }); 
+       });
+   </script>
+
+   <h2>appendTo - 추가 또는 이동</h2>
+   <ul id="list">
+       <li>first</li>
+       <li>second</li>
+       <li>third</li>
+   </ul>
+   <button class="appendToBtn">마지막으로 이동(appendTo)</button>
+   <script>
+       $(function(){
+           // $('html').appendTo(요소명)
+           $('<li>appendTo</li>').appendTo('#list');
+
+           // 첫번째 li를 마지막 위치로 이동
+           $('.appendToBtn').click(function(){
+            $('#list li:first').appendTo('#list');
+           });
+       });
+   </script>
+</body>
+</html>

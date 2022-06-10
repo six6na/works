@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>문서조작메소드</title>
+    <script src="../0607/jquery-3.6.0.min.js"></script>
+    <style>
+        .css li:nth-child(2) {
+            color: green;
+        }
+
+        article {
+            border: 1px solid #ccc;
+            padding: 1em;
+        }
+    </style>
+</head>
+<body>
+    <h2>css(속성) 읽기, css(속성, 값) 쓰기</h2>
+    <ul class="css">
+        <li style="color: red;">HTML</li>
+        <li>CSS</li>
+        <li>Javascript</li>
+        <li>jQuery</li>
+        <li></li>
+    </ul>
+    <script>
+        $(function(){
+            // 첫째 li의 color값 구하기
+            var color = $('.css li:first').css('color');
+            console.log(color);
+            color = $('.css li:nth-child(2)').css('color');
+            console.log(color);
+
+            // 여러가지 스타일 추가 1 - 메소드 체이닝
+            $('.css li:eq(2)')
+            .css('color','blue')
+            .css('background-color','yellow');
+
+            // 여러가지 스타일 추가 2 - 객체 자료형(object)
+            $('.css li:eq(3)').css({
+                'background-color': 'gray',
+                'color': 'orange',
+                'font-size': '20px'
+            });
+
+
+            // html('html내용') - 요소에 hmtl 콘텐츠 추가
+            $('.css li:eq(4)').html('<span>span추가</span>');
+
+            var html = $('.css li:eq(4)').html();
+            console.log(html);
+            // text('글자') - 요소에 text 추가하거나 읽기
+            var text = $('.css li:first').text(); //text 읽기
+            console.log('text = ', text);
+            $('.css li:first').text('텍스트 변경');
+        });
+    </script>
+
+    <article>
+        <p>아직 글이 없습니다.</p>
+    </article>
+    <br>
+    <button class="readBtn">글 보기</button>
+    <button class="emptyBtn">글 지우기</button>
+    <hr>
+    <script>
+        const post = `
+        <h2>제목</h2>
+        <p>새로운 글입니다.</p>
+        <p>새로운 글입니다.</p>
+        <p>새로운 글입니다.</p>
+        `;
+
+        //  글 추가
+        $('.readBtn').click(function(){
+            $('article').html(post);
+        });
+
+        // 글 지우기
+        $('.emptyBtn').click(function(){
+           // $('article').remove(); // remove - 요소 삭제
+           $('article').empty(); // 내용 비우기
+        });
+    </script>
+</body>
+</html>
